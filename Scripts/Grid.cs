@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 public class Grid
 {
+    public struct MoveInfo
+    {
+        public int FromRow, FromCol;
+        public int ToRow, ToCol;
+        public bool IsMerge;
+        public int Value;
+    }
+
     public const int Size = 4;
 
     public enum Direction
@@ -50,6 +58,94 @@ public class Grid
         }
 
         return (changed, scoreGained);
+    }
+
+    public static List<MoveInfo> ComputeMoves(int[,] oldState, int[,] newState, Direction dir) {
+        var moves = new List<MoveInfo>();
+
+        for (int i = 0; i < Size; i++) {
+            var oldLine = GetLineValues(oldState, i, dir);
+            var newLine = GetLineValues(newState, i, dir);
+
+            // Collect non-zero entries with their positions
+            var oldNonZero = new List<(int pos, int val)>();
+            var newNonZero = new List<(int pos, int val)>();
+            for (int p = 0; p < Size; p++) {
+                if (oldLine[p] != 0) oldNonZero.Add((p, oldLine[p]));
+                if (newLine[p] != 0) newNonZero.Add((p, newLine[p]));
+            }
+
+            int oi = 0;
+            foreach (var (newPos, newVal) in newNonZero) {
+                int fromRow1, fromCol1, fromRow2, fromCol2, toRow, toCol;
+                LinePosToCell(i, newPos, dir, out toRow, out toCol);
+
+                if (oi + 1 < oldNonZero.Count
+                    && oldNonZero[oi].val == oldNonZero[oi + 1].val
+                    && oldNonZero[oi].val * 2 == newVal) {
+                    // Merge: two old tiles → one new tile
+                    LinePosToCell(i, oldNonZero[oi].pos, dir, out fromRow1, out fromCol1);
+                    LinePosToCell(i, oldNonZero[oi + 1].pos, dir, out fromRow2, out fromCol2);
+
+                    moves.Add(new MoveInfo {
+                        FromRow = fromRow1, FromCol = fromCol1, ToRow = toRow, ToCol = toCol, IsMerge = true,
+                        Value = oldNonZero[oi].val
+                    });
+                    moves.Add(new MoveInfo {
+                        FromRow = fromRow2, FromCol = fromCol2, ToRow = toRow, ToCol = toCol, IsMerge = true,
+                        Value = oldNonZero[oi + 1].val
+                    });
+                    oi += 2;
+                } else if (oi < oldNonZero.Count && oldNonZero[oi].val == newVal) {
+                    // Simple move
+                    LinePosToCell(i, oldNonZero[oi].pos, dir, out fromRow1, out fromCol1);
+                    moves.Add(new MoveInfo {
+                        FromRow = fromRow1, FromCol = fromCol1, ToRow = toRow, ToCol = toCol, IsMerge = false,
+                        Value = newVal
+                    });
+                    oi++;
+                }
+            }
+        }
+
+        return moves;
+    }
+
+    private static int[] GetLineValues(int[,] state, int index, Direction dir) {
+        int[] line = new int[Size];
+        for (int i = 0; i < Size; i++) {
+            line[i] = dir switch {
+                Direction.Left => state[index, i],
+                Direction.Right => state[index, Size - 1 - i],
+                Direction.Up => state[i, index],
+                Direction.Down => state[Size - 1 - i, index],
+                _ => 0
+            };
+        }
+
+        return line;
+    }
+
+    private static void LinePosToCell(int lineIndex, int pos, Direction dir, out int row, out int col) {
+        switch (dir) {
+            case Direction.Left:
+                row = lineIndex;
+                col = pos;
+                break;
+            case Direction.Right:
+                row = lineIndex;
+                col = Size - 1 - pos;
+                break;
+            case Direction.Up:
+                row = pos;
+                col = lineIndex;
+                break;
+            case Direction.Down:
+                row = Size - 1 - pos;
+                col = lineIndex;
+                break;
+            default: row = col = 0; break;
+        }
     }
 
     public (int row, int col, int value)? SpawnTile() {

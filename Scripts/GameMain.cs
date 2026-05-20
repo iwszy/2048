@@ -14,6 +14,7 @@ public partial class GameMain : Control
     private Control _gameOverOverlay;
     private Label _gameOverScoreLabel;
     private bool _isGameOver;
+    private bool _isAnimating;
 
     // Mouse swipe tracking
     private Vector2 _swipeStart;
@@ -59,7 +60,7 @@ public partial class GameMain : Control
             return;
         }
 
-        if (_isGameOver) {
+        if (_isGameOver || _isAnimating) {
             return;
         }
 
@@ -78,7 +79,7 @@ public partial class GameMain : Control
     }
 
     private void HandleSwipe(Vector2 delta) {
-        if (_isGameOver) {
+        if (_isGameOver || _isAnimating) {
             return;
         }
 
@@ -102,7 +103,7 @@ public partial class GameMain : Control
 
         for (int r = 0; r < Grid.Size; r++) {
             for (int c = 0; c < Grid.Size; c++) {
-                if (cells[r, c] != 0) { 
+                if (cells[r, c] != 0) {
                     _tileBoard.AnimateSpawn(r, c);
                 }
             }
@@ -113,7 +114,8 @@ public partial class GameMain : Control
     }
 
     private void PerformMove(Grid.Direction dir) {
-        _undo.Push(_grid.GetStateCopy(), _scores.CurrentScore);
+        var oldState = _grid.GetStateCopy();
+        _undo.Push(oldState, _scores.CurrentScore);
 
         var (changed, scoreGained) = _grid.TryMove(dir);
 
@@ -123,18 +125,25 @@ public partial class GameMain : Control
         }
 
         _scores.AddScore(scoreGained);
+        _isAnimating = true;
 
-        var spawn = _grid.SpawnTile();
-        _tileBoard.RefreshBoard(_grid.Cells);
+        var newState = _grid.Cells;
+        var moves = Grid.ComputeMoves(oldState, newState, dir);
 
-        if (spawn.HasValue)
-            _tileBoard.AnimateSpawn(spawn.Value.row, spawn.Value.col);
+        _tileBoard.AnimateMove(moves, newState, () => {
+            var spawn = _grid.SpawnTile();
+            _tileBoard.RefreshBoard(_grid.Cells);
 
-        if (_grid.IsGameOver())
-            OnGameOver();
+            if (spawn.HasValue)
+                _tileBoard.AnimateSpawn(spawn.Value.row, spawn.Value.col);
 
-        UpdateScoreDisplay();
-        UpdateUndoButton();
+            if (_grid.IsGameOver())
+                OnGameOver();
+
+            UpdateScoreDisplay();
+            UpdateUndoButton();
+            _isAnimating = false;
+        });
     }
 
     private void UndoMove() {
