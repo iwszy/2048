@@ -1,3 +1,229 @@
 [gd_scene format=3 uid="uid://bqx4oqqnrxsrk"]
 
-[node name="Node2D" type="Node2D" unique_id=331596371]
+[ext_resource type="FontFile" uid="uid://busqgtr8sxx5a" path="res://resources/fonts/simkai.ttf" id="1_o5qli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wfyh"]
+bg_color = Color(0.5764706, 0.7176471, 0.8745098, 1)
+
+[node name="GameMain" type="Control" unique_id=1523322203]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control_Logo" type="Control" parent="." unique_id=377570346]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 185.0
+offset_bottom = 185.0
+
+[node name="ColorRect" type="ColorRect" parent="Control_Logo" unique_id=1020883900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control_Logo" unique_id=1889309961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 1
+theme_override_constants/paragraph_spacing = -20
+theme_override_font_sizes/font_size = 65
+text = "2 0
+4 8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel_BestScore" type="Panel" parent="." unique_id=988843304]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 25.0
+offset_right = 320.0
+offset_bottom = 125.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0wfyh")
+
+[node name="ColorRect_TextBG" type="ColorRect" parent="Panel_BestScore" unique_id=1297622406]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+color = Color(0.23529412, 0.8352941, 1, 1)
+
+[node name="Label_ScoreText" type="Label" parent="Panel_BestScore" unique_id=1052657408]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+text = "最佳分数"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_Score" type="Label" parent="Panel_BestScore" unique_id=507653062]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Panel_Score" type="Panel" parent="." unique_id=923036451]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 25.0
+offset_right = 455.0
+offset_bottom = 125.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0wfyh")
+
+[node name="ColorRect_TextBG" type="ColorRect" parent="Panel_Score" unique_id=405462654]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+color = Color(0.23529412, 0.8352941, 1, 1)
+
+[node name="Label_ScoreText" type="Label" parent="Panel_Score" unique_id=1780434632]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+text = "分数"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_Score" type="Label" parent="Panel_Score" unique_id=1628228327]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Button_NewGame" type="Button" parent="." unique_id=384041548]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 140.0
+offset_right = 275.0
+offset_bottom = 185.0
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+text = "开始"
+
+[node name="Button_Undo" type="Button" parent="." unique_id=1797604198]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 140.0
+offset_right = 365.0
+offset_bottom = 185.0
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+text = "撤销"
+
+[node name="Button_StopGame" type="Button" parent="." unique_id=1604246086]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 140.0
+offset_right = 455.0
+offset_bottom = 185.0
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 25
+text = "结束"
+
+[node name="TileBoard" type="GridContainer" parent="." unique_id=762539917]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -455.0
+offset_right = -25.0
+offset_bottom = -25.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="GameOverOverlay" type="Control" parent="." unique_id=1500343682]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -455.0
+offset_right = -25.0
+offset_bottom = -25.0
+mouse_filter = 2
+
+[node name="OverlayBg" type="ColorRect" parent="GameOverOverlay" unique_id=262629317]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxOverlay" type="VBoxContainer" parent="GameOverOverlay" unique_id=1817462883]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -55.0
+offset_right = 215.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverOverlay/VBoxOverlay" unique_id=1559707187]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 40
+text = "游戏结束！"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="GameOverOverlay/VBoxOverlay" unique_id=1350052194]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_o5qli")
+theme_override_font_sizes/font_size = 28
+text = "分数：100"
+horizontal_alignment = 1
