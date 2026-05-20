@@ -2,6 +2,7 @@
 .godot/
 
 # Build exports
+/windows/
 /android/
 /web/
 /ios/
