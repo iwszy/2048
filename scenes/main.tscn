@@ -255,10 +255,10 @@ text = "结束"
 
 [node name="TileBoardBG" type="ColorRect" parent="." unique_id=1101408321]
 layout_mode = 0
-offset_left = 25.0
-offset_top = 210.0
-offset_right = 455.0
-offset_bottom = 640.0
+offset_left = 15.0
+offset_top = 200.0
+offset_right = 465.0
+offset_bottom = 650.0
 color = Color(0.7411765, 0.68235296, 0.63529414, 1)
 
 [node name="TileBoard" type="Control" parent="." unique_id=762539917]
@@ -267,10 +267,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -455.0
-offset_right = -25.0
-offset_bottom = -25.0
+offset_left = 15.0
+offset_top = -465.0
+offset_right = -15.0
+offset_bottom = -15.0
 script = ExtResource("3_jyhfs")
 
 [node name="GameOverOverlay" type="Control" parent="." unique_id=1500343682]
@@ -282,8 +282,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 25.0
 offset_top = -455.0
-offset_right = -25.0
-offset_bottom = -25.0
+offset_right = -5.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2

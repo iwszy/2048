@@ -16,11 +16,6 @@ public partial class TileBoard : Control
     public override void _Ready() {
         CustomMinimumSize = new Vector2(BoardSize, BoardSize);
 
-        var bg = new ColorRect();
-        bg.Color = new Color("BBADA0");
-        bg.SetAnchorsPreset(LayoutPreset.FullRect);
-        AddChild(bg);
-
         for (int r = 0; r < GridSize; r++) {
             for (int c = 0; c < GridSize; c++) {
                 var tile = new TileDisplay();
@@ -135,8 +130,10 @@ public partial class TileBoard : Control
     }
 
     private void ClearAnimTiles() {
-        foreach (var t in _animTiles)
+        foreach (var t in _animTiles) {
             t.QueueFree();
+        }
+
         _animTiles.Clear();
     }
 
