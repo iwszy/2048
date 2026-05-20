@@ -75,7 +75,7 @@ public partial class TileBoard : Control
         tween.SetParallel(true);
         for (int i = 0; i < moves.Count; i++) {
             var targetPos = CellPosition(moves[i].ToRow, moves[i].ToCol);
-            tween.TweenProperty(_animTiles[i], "position", targetPos, 0.01f)
+            tween.TweenProperty(_animTiles[i], "position", targetPos, 0.02f)
                 .SetEase(Tween.EaseType.InOut);
         }
 
@@ -92,7 +92,7 @@ public partial class TileBoard : Control
         }));
         tween.SetParallel(true);
         foreach (var (r, c) in mergeDestinations) {
-            tween.TweenProperty(_tiles[r, c], "scale", Vector2.One, 0.15f)
+            tween.TweenProperty(_tiles[r, c], "scale", Vector2.One, 0.2f)
                 .From(new Vector2(1.3f, 1.3f))
                 .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Back);
         }
