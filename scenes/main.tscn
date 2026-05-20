@@ -1,9 +1,62 @@
 [gd_scene format=3 uid="uid://bqx4oqqnrxsrk"]
 
 [ext_resource type="FontFile" uid="uid://busqgtr8sxx5a" path="res://resources/fonts/simkai.ttf" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cu4bawibj2oin" path="res://Scripts/GameMain.cs" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://bx0wt5rx128lg" path="res://Scripts/TileBoard.cs" id="3_jyhfs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wfyh"]
-bg_color = Color(0.5764706, 0.7176471, 0.8745098, 1)
+bg_color = Color(0.93333334, 0.89411765, 0.85490197, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.84, 0.58, 0.38, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.22)
+content_margin_left = 6
+content_margin_right = 6
+content_margin_top = 4
+content_margin_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.91, 0.69, 0.50, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.30)
+content_margin_left = 6
+content_margin_right = 6
+content_margin_top = 4
+content_margin_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0.73, 0.46, 0.27, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0)
+content_margin_left = 8
+content_margin_right = 4
+content_margin_top = 6
+content_margin_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_disabled"]
+bg_color = Color(0.69, 0.63, 0.56, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+shadow_size = 0
+content_margin_left = 6
+content_margin_right = 6
+content_margin_top = 4
+content_margin_bottom = 4
 
 [node name="GameMain" type="Control" unique_id=1523322203]
 layout_mode = 3
@@ -12,6 +65,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_sugp2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1918643154]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8392157, 0.8392157, 0.8392157, 1)
 
 [node name="Control_Logo" type="Control" parent="." unique_id=377570346]
 anchors_preset = 0
@@ -27,6 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.93, 0.837, 0.651, 1)
 
 [node name="Label" type="Label" parent="Control_Logo" unique_id=1889309961]
 layout_mode = 1
@@ -35,7 +99,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.92941177, 0.48235294, 0.101960786, 1)
 theme_override_constants/line_spacing = 1
 theme_override_constants/paragraph_spacing = -20
 theme_override_font_sizes/font_size = 65
@@ -58,7 +122,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 30.0
 grow_horizontal = 2
-color = Color(0.23529412, 0.8352941, 1, 1)
+color = Color(0.93, 0.67425, 0.4185, 1)
 
 [node name="Label_ScoreText" type="Label" parent="Panel_BestScore" unique_id=1052657408]
 layout_mode = 1
@@ -103,7 +167,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 30.0
 grow_horizontal = 2
-color = Color(0.23529412, 0.8352941, 1, 1)
+color = Color(0.92941177, 0.6745098, 0.41960785, 1)
 
 [node name="Label_ScoreText" type="Label" parent="Panel_Score" unique_id=1780434632]
 layout_mode = 1
@@ -140,8 +204,17 @@ offset_left = 200.0
 offset_top = 140.0
 offset_right = 275.0
 offset_bottom = 185.0
+theme_override_colors/font_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.50, 0.45, 0.40, 1)
 theme_override_fonts/font = ExtResource("1_o5qli")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
 text = "开始"
 
 [node name="Button_Undo" type="Button" parent="." unique_id=1797604198]
@@ -150,8 +223,17 @@ offset_left = 290.0
 offset_top = 140.0
 offset_right = 365.0
 offset_bottom = 185.0
+theme_override_colors/font_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.50, 0.45, 0.40, 1)
 theme_override_fonts/font = ExtResource("1_o5qli")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
 text = "撤销"
 
 [node name="Button_StopGame" type="Button" parent="." unique_id=1604246086]
@@ -160,9 +242,26 @@ offset_left = 380.0
 offset_top = 140.0
 offset_right = 455.0
 offset_bottom = 185.0
+theme_override_colors/font_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.16, 0.10, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.50, 0.45, 0.40, 1)
 theme_override_fonts/font = ExtResource("1_o5qli")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
 text = "结束"
+
+[node name="TileBoardBG" type="ColorRect" parent="." unique_id=1101408321]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 210.0
+offset_right = 455.0
+offset_bottom = 640.0
+color = Color(0.7411765, 0.68235296, 0.63529414, 1)
 
 [node name="TileBoard" type="GridContainer" parent="." unique_id=762539917]
 layout_mode = 1
@@ -177,8 +276,10 @@ offset_bottom = -25.0
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 4
+script = ExtResource("3_jyhfs")
 
 [node name="GameOverOverlay" type="Control" parent="." unique_id=1500343682]
+visible = false
 layout_mode = 1
 anchor_top = 1.0
 anchor_right = 1.0
