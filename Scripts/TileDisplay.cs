@@ -11,7 +11,7 @@ public partial class TileDisplay : Control
     public int Value => _value;
 
     public TileDisplay() {
-        SetSize(new Vector2(TileSize, TileSize));
+        CustomMinimumSize = new Vector2(TileSize, TileSize);
     }
 
     public override void _Ready() {
